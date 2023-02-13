@@ -16,8 +16,8 @@ import urllib.request
 
 ATTEMPTS = 5
 GENERAL_ATTEMPS = 3
-SETUP_DELAY = 20
-ATTEMPT_DELAY = 5
+SETUP_DELAY = 60  # el mínimo es aprox 30 segundos luego de ejecutar el comando AT, asi que 1 minuto esta bien
+ATTEMPT_DELAY = 5   # no es necesario que sea amplio (tener en cuenta que s emultiplicara xATTEMPTS para comprobar conexion)
 CONNECTION_LINK = 'http://google.com'
 
 class Connection:
@@ -38,7 +38,7 @@ class Connection:
         time.sleep(setup_delay)
         os.system("echo Executing ppp -c") #print
         os.system("ppp -c")
-        time.sleep(setup_delay)
+        time.sleep(attempt_delay)
         while self.disconnects_counter <= attempts-1:
             if self.connect_link():
                 os.system("echo Connected") #print
@@ -51,7 +51,7 @@ class Connection:
 
             time.sleep(attempt_delay)
 
-        os.system("atcom --port /dev/ttyUSB2 AT+CRESET") # Restart interface sending the AT command
+        os.system("atcom --port /dev/ttyUSB2 --baudrate 115200 AT+CRESET") # Restart interface sending the AT command
 
     def go(self,attempts=GENERAL_ATTEMPS):
         self.attempts_counter = 0
