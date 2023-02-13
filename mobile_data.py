@@ -36,18 +36,18 @@ class Connection:
     def mobile_attempt(self, attempts=ATTEMPTS, attempt_delay=ATTEMPT_DELAY, setup_delay=SETUP_DELAY):
         self.disconnects_counter = 0
         time.sleep(setup_delay)
-        os.system("echo Executing ppp -c") #print
+        os.system("echo mydebug: Executing ppp -c") #print
         os.system("ppp -c")
         time.sleep(attempt_delay)
         while self.disconnects_counter <= attempts-1:
             if self.connect_link():
-                os.system("echo Connected") #print
+                os.system("echo mydebug: Connected") #print
                 self.disconnects_counter = 0
                 self.attempts_counter = 0
             
             else:
                 self.disconnects_counter += 1
-                os.system(f' echo Disconnected, {self.disconnects_counter} attempt') #print
+                os.system(f' echo mydebug: Disconnected, {self.disconnects_counter} attempt') #print
 
             time.sleep(attempt_delay)
 
@@ -59,9 +59,9 @@ class Connection:
         while self.attempts_counter <= attempts - 1:
             self.mobile_attempt()
             self.attempts_counter += 1
-            os.system(f"echo {self.attempts_counter} ATTEMPT FAIL")
+            os.system(f"echo mydebug: {self.attempts_counter} ATTEMPT FAIL")
 
-        os.system("echo not connecting, rebooting") #print
+        os.system("echo mydebug: not connecting, rebooting") #print
         os.system("reboot")
     
 
