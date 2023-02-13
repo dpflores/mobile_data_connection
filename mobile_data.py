@@ -36,8 +36,8 @@ class Connection:
     def mobile_attempt(self, attempts=ATTEMPTS, attempt_delay=ATTEMPT_DELAY, setup_delay=SETUP_DELAY):
         self.disconnects_counter = 0
         time.sleep(setup_delay)
-        os.system("echo Executing ppp -cD") #print
-        os.system("ppp -cD")
+        os.system("echo Executing ppp -c") #print
+        os.system("ppp -c")
         time.sleep(setup_delay)
         while self.disconnects_counter <= attempts-1:
             if self.connect_link():
