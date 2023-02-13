@@ -6,7 +6,7 @@ After=multi-user.target
 
 Type=simple
 
-ExecStart=/usr/bin/python3 /root/mobile_data_connection/axotec_mqtt.py
+ExecStart=/usr/bin/python3 /root/mobile_data_connection/mobile_data.py
 Restart=on-failure
 RestartSec=5
 
