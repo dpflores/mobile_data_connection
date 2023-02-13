@@ -7,6 +7,8 @@ def main():
 	os.system("systemctl enable mobile_data.service")
 	os.system("systemctl start mobile_data.service")
 
+	os.system("pip3 install -r requirements.txt")
+
 	print("done")
 if __name__ == '__main__':
 	main()

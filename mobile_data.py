@@ -1,3 +1,14 @@
+"""
+Este programa se asegura que exista la conexión con los datos móviles, 
+(se asume que la configuración ya fue realizada con el APN). Este verifica
+5 veces la conexión a internet (probar solo con chip). Si no se recibe respuesta esas 
+5 veces, entonces se reinicial la interfaz enviando un comando AT. Si aún así esto no funciona,
+y esto se repite por 3 veces, entonces el sistema se reinicia. Esto supone que el chip no funciona o
+que ya no dispone de conexión a internet.
+
+
+"""
+
 import os 
 import sys
 import time
@@ -5,7 +16,7 @@ import urllib.request
 
 ATTEMPTS = 5
 GENERAL_ATTEMPS = 3
-ATTEMPT_DELAY = 3
+ATTEMPT_DELAY = 5
 CONNECTION_LINK = 'http://google.com'
 
 class Connection:
@@ -35,6 +46,8 @@ class Connection:
             else:
                 self.disconnects_counter += 1
                 print(f'Disconnected, {self.disconnects_counter} attempt')
+                os.system("atcom --port /dev/ttyUSB2 AT+CRESET") # Restart interface sending the AT command
+
             time.sleep(attempt_delay)
 
     def go(self,attempts=GENERAL_ATTEMPS):
