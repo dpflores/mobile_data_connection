@@ -5,7 +5,7 @@ import urllib.request
 
 ATTEMPTS = 5
 GENERAL_ATTEMPS = 3
-ATTEMPT_DELAY = 15
+ATTEMPT_DELAY = 3
 CONNECTION_LINK = 'http://google.com'
 
 class Connection:
