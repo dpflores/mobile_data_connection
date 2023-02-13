@@ -59,7 +59,7 @@ class Connection:
         while self.attempts_counter <= attempts-1:
             self.mobile_attempt()
             self.attempts_counter += 1
-            print(f"{self.attempts_counter} FAIL")
+            os.system(f"echo {self.attempts_counter} FAIL")
 
         os.system("echo not connecting, rebooting") #print
         os.system("reboot")
