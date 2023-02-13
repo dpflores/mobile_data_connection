@@ -15,7 +15,7 @@ import time
 import urllib.request
 
 ATTEMPTS = 5
-GENERAL_ATTEMPS = 3
+GENERAL_ATTEMPS = 5
 SETUP_DELAY = 60  # el mínimo es aprox 30 segundos luego de ejecutar el comando AT, asi que 1 minuto esta bien
 ATTEMPT_DELAY = 5   # no es necesario que sea amplio (tener en cuenta que s emultiplicara xATTEMPTS para comprobar conexion)
 CONNECTION_LINK = 'http://google.com'
@@ -56,10 +56,10 @@ class Connection:
     def go(self,attempts=GENERAL_ATTEMPS):
         self.attempts_counter = 0
 
-        while self.attempts_counter <= attempts-1:
+        while self.attempts_counter <= attempts - 1:
             self.mobile_attempt()
             self.attempts_counter += 1
-            os.system(f"echo {self.attempts_counter} FAIL")
+            os.system(f"echo {self.attempts_counter}ATTEMPT FAIL")
 
         os.system("echo not connecting, rebooting") #print
         os.system("reboot")
