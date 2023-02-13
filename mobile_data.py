@@ -34,18 +34,19 @@ class Connection:
 
     def mobile_attempt(self, attempts=ATTEMPTS, attempt_delay=ATTEMPT_DELAY):
         self.disconnects_counter = 0
-        print("Executing ppp -cD")
+        time.sleep(attempt_delay)
+        os.system("echo Executing ppp -cD") #print
         os.system("ppp -cD")
         time.sleep(attempt_delay)
         while self.disconnects_counter <= attempts-1:
             if self.connect_link():
-                print("Connected")
+                os.system("echo Connected") #print
                 self.disconnects_counter = 0
                 self.attempts_counter = 0
             
             else:
                 self.disconnects_counter += 1
-                print(f'Disconnected, {self.disconnects_counter} attempt')
+                os.system(f' echo Disconnected, {self.disconnects_counter} attempt') #print
                 os.system("atcom --port /dev/ttyUSB2 AT+CRESET") # Restart interface sending the AT command
 
             time.sleep(attempt_delay)
@@ -58,7 +59,7 @@ class Connection:
             self.attempts_counter += 1
             print(f"{self.attempts_counter} FAIL")
 
-        print("not connecting, rebooting")
+        os.system("echo not connecting, rebooting") #print
         os.system("reboot")
     
 
