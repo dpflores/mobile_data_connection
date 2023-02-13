@@ -16,7 +16,8 @@ import urllib.request
 
 ATTEMPTS = 5
 GENERAL_ATTEMPS = 3
-ATTEMPT_DELAY = 15
+SETUP_DELAY = 20
+ATTEMPT_DELAY = 5
 CONNECTION_LINK = 'http://google.com'
 
 class Connection:
@@ -32,12 +33,12 @@ class Connection:
         except:
             return False
 
-    def mobile_attempt(self, attempts=ATTEMPTS, attempt_delay=ATTEMPT_DELAY):
+    def mobile_attempt(self, attempts=ATTEMPTS, attempt_delay=ATTEMPT_DELAY, setup_delay=SETUP_DELAY):
         self.disconnects_counter = 0
-        time.sleep(attempt_delay)
+        time.sleep(setup_delay)
         os.system("echo Executing ppp -cD") #print
         os.system("ppp -cD")
-        time.sleep(attempt_delay)
+        time.sleep(setup_delay)
         while self.disconnects_counter <= attempts-1:
             if self.connect_link():
                 os.system("echo Connected") #print
