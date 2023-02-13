@@ -23,7 +23,8 @@ class Connection:
 
     def mobile_attempt(self, attempts=ATTEMPTS, attempt_delay=ATTEMPT_DELAY):
         self.disconnects_counter = 0
-        #os.system("ppp -c")
+        print("Executing ppp -c")
+        os.system("ppp -c")
         time.sleep(attempt_delay)
         while self.disconnects_counter <= attempts-1:
             if self.connect_link():
@@ -45,7 +46,7 @@ class Connection:
             print(f"{self.attempts_counter} FAIL")
 
         print("not connecting, rebooting")
-        #os.system("reboot")
+        os.system("reboot")
     
 
     
