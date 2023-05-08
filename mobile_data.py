@@ -39,6 +39,8 @@ class Connection:
         os.system("echo mydebug: Executing ppp -c") #print
         os.system("ppp -c")
         time.sleep(attempt_delay)
+        os.system("route add default dev ppp0") # se asume que se crea la interfaz ppp0
+        time.sleep(attempt_delay)
         while self.disconnects_counter <= attempts-1:
             if self.connect_link():
                 os.system("echo mydebug: Connected") #print
